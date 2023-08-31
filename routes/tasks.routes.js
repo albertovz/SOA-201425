@@ -42,7 +42,7 @@ const verifyToken = (req, res, next) => {
 task.get("/view/list", verifyToken, (req, res) => taskController.task_list(req, res));
 task.get("/view/details/:id", verifyToken, (req, res) => taskController.task_list_details(req, res));
 task.post("/create", (req, res) => taskController.task_create(req, res));
-task.put("/status", verifyToken, (req, res) => taskController.task_status(req, res));
+task.delete("/status", verifyToken, (req, res) => taskController.task_status(req, res));
 // task.put("/update/password", verifyToken, (req, res) => userController.user_update_password(req, res));
 // task.put("/update/profile", upload.single("imgProfile"), verifyToken, (req, res) => userController.user_update_profile(req, res));
 // task.post("/login", (req, res) => userController.user_login(req, res));

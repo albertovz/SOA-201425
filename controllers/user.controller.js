@@ -100,7 +100,10 @@ const user_login = async (req, res) => {
                 {
                     id: user.id,
                 },
-                "secret"
+                "secret",
+                {
+                    expiresIn: "15m",
+                }
             );
             user.token = token;
             res.header("auth-token", token).json({

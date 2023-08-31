@@ -16,7 +16,10 @@ const data = dotenv.config({
 });
 
 const task_list = async function (req, res) {
-    getTask.Task.findAll()
+    getTask.Task.findAll({
+        attributes: ["id", "title", "description", "status"],
+        where: { deletedAt: null }
+    })
         .then((response) => {
             res.send(response);
             console.log(response);
@@ -54,8 +57,6 @@ const task_create = (req, res) => {
             console.log(err);
         });
 
-
-
 };
 
 const task_list_details = async function (req, res) {
@@ -73,19 +74,23 @@ const task_list_details = async function (req, res) {
         });
 };
 
-const task_status = (req, res) => {
-    let status = req.body.status;
-    let newDatas = { id, status };
-    console.log(newDatas);
-    getTask.Task.findOne({ where: { id: id } })
+const task_status = async (req, res) => {
+    let id = req.query.id;
 
-        .then((r) => {
-            r.update(newDatas);
-            res.send("Contraseña actualizada");
-        })
-        .catch((err) => {
-            res.status(400).send(err);
-        });
+    try {
+        const result = await getTask.Task.update(
+            { deletedAt: new Date() },
+            { where: { id: id, deletedAt: null } }
+        );
+
+        if (result[0] === 1) {
+            res.status(200).json({ message: "Registro marcado como eliminado" });
+        } else {
+            res.status(404).json({ message: "Registro no encontrado o ya marcado como eliminado" });
+        }
+    } catch (err) {
+        res.status(400).json({ err: 'Error al marcar como eliminado' });
+    }
 };
 
 export const taskController = {
