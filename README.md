@@ -9,3 +9,5 @@ Cómo iniciar el proyecto:
   Las credenciales para la conexión de la base de datos se puede modificar en el código fuente en la carpeta /environments/.env.development
 
   Se usó el framework de NodeJs como servidor del proyecto, por la facilidad y gran recurso de documentación que hay y mucho tema por parte de la comunidad. En lo personal, la curva del aprendizaje es alta, ya que estoy familiarizado y cuento con experiencia usando este framework.
+
+Link del documento del API: https://documenter.getpostman.com/view/14450437/2s9Y5bR1hA
